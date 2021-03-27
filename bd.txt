@@ -1,0 +1,62 @@
+
+
+create table pedidos(
+
+	id int AUTO_INCREMENT PRIMARY KEY,
+	nomeCliente varchar(250),
+	endereco varchar(400),
+	horario varchar(100)
+);
+
+
+create table lanches (
+
+	pedidosID int,
+	donoLanche varchar(250) NOT NULL,
+	preco double,
+
+ CONSTRAINT fk_pedido FOREIGN KEY (pedidosID) REFERENCES pedidos(id),
+ CONSTRAINT pk_lanches PRIMARY KEY (pedidosID,donoLanche)
+	
+);
+
+create table ingredientes(
+
+	codigo int primary key,
+	nome varchar(250),
+	tipo int,
+	precoCompra double,
+	precoVenda double,
+	qtdEstoque double,
+	qtdMinEstoque double,
+	lucro double,
+	qtdGastaPorcao double
+
+);
+
+create table lanche_ingrediente (
+
+
+	id int primary key auto_increment,
+	ingredientesID int,
+	pedidosID int,
+	donoLanche varchar(250) DEFAULT 0, 
+
+
+ CONSTRAINT fk_ingredientes FOREIGN KEY (ingredientesID) REFERENCES ingredientes(codigo),
+
+CONSTRAINT fk_lanches FOREIGN KEY lanche_ingrediente(donoLanche) REFERENCES lanches(donoLanche),
+
+constraint fk_lanches2 FOREIGN KEY (pedidosID) REFERENCES lanches(pedidosID)
+
+);
+
+
+
+
+
+
+
+
+
+
